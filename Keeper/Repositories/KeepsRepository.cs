@@ -28,6 +28,7 @@ public class KeepsRepository
 
   internal List<Keep> GetAllKeeps()
   {
+    // TODO add COUNT
     string sql = @"
     SELECT 
     k.*,
@@ -41,5 +42,24 @@ public class KeepsRepository
       return keep;
     }).ToList();
     return keeps;
+  }
+
+  internal Keep GetOneKeep(int keepId)
+  {
+    // TODO add COUNT
+    string sql = @"
+    SELECT
+    k.*,
+    creator.*
+    FROM keeps k
+    JOIN accounts creator ON creator.id = k.creatorId
+    WHERE k.id = @keepId
+    ;";
+    Keep keep = _db.Query<Keep, Profile, Keep>(sql, (keep, creator) =>
+    {
+      keep.Creator = creator;
+      return keep;
+    }, new{keepId}).FirstOrDefault();
+    return keep;
   }
 }

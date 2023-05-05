@@ -41,4 +41,18 @@ public class KeepsController : ControllerBase
     return BadRequest(e.Message);
     }
   }
+
+  [HttpGet("{keepId}")]
+  public async Task<ActionResult<Keep>> GetOneKeep(int keepId)
+  {
+    try {
+    Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
+      Keep keep = _keepsService.GetOneKeep(keepId, userInfo?.Id);
+      return Ok(keep);
+    }
+    catch (Exception e)
+    {
+    return BadRequest(e.Message);
+    }
+  }
 }

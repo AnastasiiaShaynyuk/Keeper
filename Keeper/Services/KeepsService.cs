@@ -22,9 +22,18 @@ public class KeepsService
     return keep;
   }
 
-  internal List<Keep> GetAllKeeps(string id)
+  internal List<Keep> GetAllKeeps(string userId)
   {
     List<Keep> keeps = _repo.GetAllKeeps();
+    // TODO add private
     return keeps;
+  }
+
+  internal Keep GetOneKeep(int keepId, string userId)
+  {
+    Keep keep = _repo.GetOneKeep(keepId);
+    if (keep == null) throw new Exception($"THIS ID WAS INVALID: {keepId}");
+    // TODO add private
+    return keep;
   }
 }
