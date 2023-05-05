@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
 namespace Keeper.Controllers;
 
 [ApiController]
@@ -24,10 +18,23 @@ public class KeepsController : ControllerBase
   public async Task<ActionResult<Keep>> CreateKeep([FromBody] Keep keepData) {
     try {
     Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-      keepData.CreatorId = userInfo.Id;
-      Keep keep = _keepsService.CreateKeep(keepData);
-      keep.Creator = userInfo;
-      return Ok(keep);
+    keepData.CreatorId = userInfo.Id;
+    Keep keep = _keepsService.CreateKeep(keepData);
+    keep.Creator = userInfo;
+    return Ok(keep);
+    }
+    catch (Exception e)
+    {
+    return BadRequest(e.Message);
+    }
+  }
+
+  [HttpGet]
+  public async Task<ActionResult<List<Keep>>> GetAllKeeps() {
+    try {
+    Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
+    List<Keep> keeps = _keepsService.GetAllKeeps(userInfo?.Id);
+    return Ok(keeps);
     }
     catch (Exception e)
     {

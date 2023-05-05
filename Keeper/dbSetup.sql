@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS accounts(
   picture varchar(255) COMMENT 'User Picture'
 ) default charset utf8mb4 COMMENT '';
 
+ALTER TABLE accounts ADD COLUMN coverImg VARCHAR(1000) NOT NULL;
+
 
 CREATE TABLE keeps(
   id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,

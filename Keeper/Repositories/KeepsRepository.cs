@@ -25,4 +25,21 @@ public class KeepsRepository
     keepData.Id = id;
     return keepData;
   }
+
+  internal List<Keep> GetAllKeeps()
+  {
+    string sql = @"
+    SELECT 
+    k.*,
+    creator.*
+    FROM keeps k
+    JOIN accounts creator ON creator.id = k.creatorId
+    ;";
+    List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, (keep, creator) =>
+    {
+      keep.Creator = creator;
+      return keep;
+    }).ToList();
+    return keeps;
+  }
 }
