@@ -26,6 +26,26 @@ public class KeepsRepository
     return keepData;
   }
 
+  internal void DeleteKeep(int keepId)
+  {
+    string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
+
+    _db.Execute(sql, new { keepId });
+  }
+
+  internal void EditKeep(Keep originalKeep)
+  {
+    string sql = @"
+    UPDATE keeps
+    SET
+    name = @Name,
+    description = @Description,
+    img = @Img
+    WHERE id = @Id
+    ;";
+    _db.Execute(sql, originalKeep);
+  }
+
   internal List<Keep> GetAllKeeps()
   {
     // TODO add COUNT

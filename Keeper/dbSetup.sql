@@ -5,11 +5,9 @@ CREATE TABLE IF NOT EXISTS accounts(
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
   name varchar(255) COMMENT 'User Name',
   email varchar(255) COMMENT 'User Email',
-  picture varchar(255) COMMENT 'User Picture'
+  picture varchar(255) COMMENT 'User Picture',
+  coverImg VARCHAR(1000) DEFAULT "https://images.unsplash.com/photo-1683123851331-0f4922b4946d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
 ) default charset utf8mb4 COMMENT '';
-
-ALTER TABLE accounts ADD COLUMN coverImg VARCHAR(1000) NOT NULL;
-
 
 CREATE TABLE keeps(
   id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,

@@ -22,6 +22,26 @@ public class KeepsService
     return keep;
   }
 
+  internal string DeleteKeep(int keepId, string userId)
+  {
+    Keep keep = GetOneKeep(keepId, userId);
+    if (keep.CreatorId != userId) throw new Exception("Something went wrong");
+    _repo.DeleteKeep(keepId);
+    return "Keep was deleted successfully.";
+  }
+
+  internal Keep EditKeep(Keep keepData)
+  {
+    Keep originalKeep = GetOneKeep(keepData.Id, keepData.CreatorId);
+    if (originalKeep.CreatorId != keepData.CreatorId) throw new Exception("This is not your keep");
+    originalKeep.Name = keepData.Name ?? originalKeep.Name;
+    originalKeep.Description = keepData.Description ?? originalKeep.Description;
+    originalKeep.Img = keepData.Img ?? originalKeep.Img;
+    _repo.EditKeep(originalKeep);
+    originalKeep.UpdatedAt = DateTime.Now;
+    return originalKeep;
+  }
+
   internal List<Keep> GetAllKeeps(string userId)
   {
     List<Keep> keeps = _repo.GetAllKeeps();
