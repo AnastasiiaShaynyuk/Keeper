@@ -45,7 +45,7 @@ public class KeepsService
   internal List<Keep> GetAllKeeps(string userId)
   {
     List<Keep> keeps = _repo.GetAllKeeps();
-    // TODO add private
+    // TODO add private?
     return keeps;
   }
 
@@ -53,7 +53,7 @@ public class KeepsService
   {
     Keep keep = _repo.GetOneKeep(keepId);
     if (keep == null) throw new Exception($"THIS ID WAS INVALID: {keepId}");
-    // TODO add private
+    // TODO add private?
     return keep;
   }
 }
