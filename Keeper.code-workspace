@@ -1,0 +1,65 @@
+{
+  "folders": [
+    {
+      "path": "Keeper.client",
+      "name": "client"
+    },
+    {
+      "path": "Keeper",
+      "name": "server"
+    },
+    { "path": ".github/workflows", "name": "workflows" }
+  ],
+  "settings": {
+    "editor.suggestSelection": "first",
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "javascript.referencesCodeLens.enabled": true,
+    "javascript.referencesCodeLens.showOnAllFunctions": true,
+    "typescript.implementationsCodeLens.enabled": true,
+    "typescript.referencesCodeLens.enabled": true,
+    "typescript.referencesCodeLens.showOnAllFunctions": true,
+    "js/ts.implicitProjectConfig.checkJs": true,
+    "files.exclude": {
+      "**/.nyc_*": true,
+      "**/coverage": true,
+      "**/node_modules": true
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "explorer.confirmDragAndDrop": false,
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "eslint.codeActionsOnSave.mode": "all",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+    "files.associations": {
+      "*.vue": "vue"
+    },
+    "[vue]": {
+      "editor.defaultFormatter": "Vue.volar"
+    },
+    "workbench.colorCustomizations": {
+      "activityBar.activeBackground": "#a8e860",
+      "activityBar.background": "#a8e860",
+      "activityBar.foreground": "#15202b",
+      "activityBar.inactiveForeground": "#15202b99",
+      "activityBarBadge.background": "#3c94e3",
+      "activityBarBadge.foreground": "#15202b",
+      "commandCenter.border": "#15202b99",
+      "sash.hoverBorder": "#a8e860",
+      "statusBar.background": "#8fe233",
+      "statusBar.foreground": "#15202b",
+      "statusBarItem.hoverBackground": "#75c61c",
+      "statusBarItem.remoteBackground": "#8fe233",
+      "statusBarItem.remoteForeground": "#15202b",
+      "titleBar.activeBackground": "#8fe233",
+      "titleBar.activeForeground": "#15202b",
+      "titleBar.inactiveBackground": "#8fe23399",
+      "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#8fe233"
+  }
+}
