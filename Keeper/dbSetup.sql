@@ -33,3 +33,10 @@ CREATE TABLE vaults(
   updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
   FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 )default charset utf8mb4 COMMENT '';
+
+CREATE TABLE vaultKeeps(
+  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  creatorId VARCHAR(255) NOT NULL,
+  keepId INT NOT NULL,
+  
+) default charset utf8mb4 COMMENT '';

@@ -53,7 +53,7 @@ public class KeepsService
   {
     Keep keep = _repo.GetOneKeep(keepId);
     if (keep == null) throw new Exception($"THIS ID WAS INVALID: {keepId}");
-    // TODO add private?
+    keep.Views++;
     return keep;
   }
 }

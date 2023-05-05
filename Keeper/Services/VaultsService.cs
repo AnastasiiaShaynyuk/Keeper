@@ -22,6 +22,27 @@ public class VaultsService
     return vault;
   }
 
+  internal string DeleteVault(int vaultId, string userId)
+  {
+    Vault vault = GetOneVault(vaultId, userId);
+    if (vault.CreatorId != userId) throw new Exception("Something went wrong");
+    _repo.DeleteVault(vaultId);
+    return "Vault was deleted successfully.";
+  }
+
+  internal Vault EditVault(Vault vaultData)
+  {
+    Vault originalVault = GetOneVault(vaultData.Id, vaultData.CreatorId);
+    if (originalVault.CreatorId != vaultData.CreatorId) throw new Exception("This is not your vault");
+    originalVault.Name = vaultData.Name ?? originalVault.Name;
+    originalVault.Description = vaultData.Description ?? originalVault.Description;
+    originalVault.Img = vaultData.Img ?? originalVault.Img;
+    originalVault.IsPrivate = vaultData != null ? vaultData.IsPrivate : originalVault.IsPrivate;
+    _repo.EditVault(originalVault);
+    originalVault.UpdatedAt = DateTime.Now;
+    return originalVault;
+  }
+
   internal Vault GetOneVault(int vaultId, string userId)
   {
     Vault vault = _repo.GetOneVault(vaultId);
