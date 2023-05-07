@@ -38,4 +38,22 @@ public class ProfilesRepository
     Profile profile = _db.Query<Profile>(sql, new { profileId }).FirstOrDefault();
     return profile;
   }
+
+  internal List<Vault> GetUsersVaults(string profileId)
+  {
+    string sql = @"
+    SELECT
+    v.*,
+    creator.*
+    FROM vaults v
+    JOIN accounts creator ON creator.id = v.creatorId
+    WHERE v.creatorId = @profileId && v.isPrivate = 0;
+    ;";
+    List<Vault> vaults = _db.Query<Vault, Profile, Vault>(sql, (vault, creator) =>
+    {
+      vault.Creator = creator;
+      return vault;
+    }, new{profileId}).ToList();
+    return vaults;
+  }
 }

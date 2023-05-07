@@ -25,4 +25,10 @@ public class ProfilesService
     Profile profile = _repo.GetUsersProfile(profileId);
     return profile;
   }
+
+  internal List<Vault> GetUsersVaults(string profileId)
+  {
+    List<Vault> vaults = _repo.GetUsersVaults(profileId);
+    return vaults;
+  }
 }
