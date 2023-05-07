@@ -81,6 +81,19 @@ public class VaultsController : ControllerBase
     {
     return BadRequest(e.Message);
     }
-    
+  }
+
+  [HttpGet("{vaultId}/keeps")]
+  public async Task<ActionResult<List<KeepsInVault>>> GetVaultKeeps(int vaultId)
+  {
+    try {
+    Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
+    List<KeepsInVault> vKeeps = _vaultsService.GetVaultKeeps(vaultId, userInfo.Id);
+    return Ok(vKeeps);
+    }
+    catch (Exception e)
+    {
+    return BadRequest(e.Message);
+    }
   }
 }
