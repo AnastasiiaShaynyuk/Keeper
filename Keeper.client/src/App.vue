@@ -5,9 +5,8 @@
   <main>
     <router-view />
   </main>
-   <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
-  </footer>
+  <!-- <footer class="bg-dark text-light">
+  </footer> -->
 </template>
 
 <script>
@@ -32,9 +31,6 @@ export default {
 }
 
 
-footer {
-  display: grid;
-  place-content: center;
-  height: 32px;
-}
+
+
 </style>

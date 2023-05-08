@@ -8,14 +8,19 @@ namespace Keeper.Services;
 public class VaultKeepsService
 {
   private readonly VaultKeepsRepository _repo;
+  private readonly VaultsService _vaultsService;
 
-  public VaultKeepsService(VaultKeepsRepository repo)
+  public VaultKeepsService(VaultKeepsRepository repo, VaultsService vaultsService)
   {
     _repo = repo;
+    _vaultsService = vaultsService;
   }
 
-  internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData)
+  internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData, string userId)
   {
+    Vault vault = _vaultsService.GetOneVault(vaultKeepData.VaultId, userId);
+    if (vault.CreatorId != userId) throw new Exception("Something went wrong");
+
     VaultKeep vaultKeep = _repo.CreateVaultKeep(vaultKeepData);
     vaultKeep.CreatedAt = DateTime.Now;
     vaultKeep.UpdatedAt = DateTime.Now;

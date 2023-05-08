@@ -74,7 +74,7 @@ public class VaultsController : ControllerBase
   {
     try {
     Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-    string message = _vaultsService.DeleteVault(vaultId, userInfo.Id);
+    string message = _vaultsService.DeleteVault(vaultId, userInfo?.Id);
     return Ok(message);
     }
     catch (Exception e)
@@ -88,7 +88,7 @@ public class VaultsController : ControllerBase
   {
     try {
     Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-    List<KeepsInVault> vKeeps = _vaultsService.GetVaultKeeps(vaultId, userInfo.Id);
+    List<KeepsInVault> vKeeps = _vaultsService.GetVaultKeeps(vaultId, userInfo?.Id);
     return Ok(vKeeps);
     }
     catch (Exception e)
