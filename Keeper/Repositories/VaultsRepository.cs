@@ -95,7 +95,7 @@ public class VaultsRepository
     JOIN accounts creator ON creator.id = k.creatorId
     WHERE vk.vaultId = @vaultId
     ;";
-    List<KeepsInVault> vKeeps = _db.Query<KeepsInVault, VaultKeep, Profile, KeepsInVault>(sql, (vKeep, vaultKeep, creator) =>
+    List<KeepsInVault> vKeeps = _db.Query<VaultKeep, KeepsInVault, Profile, KeepsInVault>(sql, (vaultKeep, vKeep, creator) =>
     {
       vKeep.VaultKeepId = vaultKeep.Id;
       vKeep.Creator = creator;

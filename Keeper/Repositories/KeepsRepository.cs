@@ -40,8 +40,7 @@ public class KeepsRepository
     SET
     name = @Name,
     description = @Description,
-    img = @Img,
-    views = @Views
+    img = @Img
     WHERE id = @Id
     ;";
     _db.Execute(sql, originalKeep);
@@ -53,9 +52,12 @@ public class KeepsRepository
     string sql = @"
     SELECT 
     k.*,
+    COUNT(vk.id) AS kept,
     creator.*
     FROM keeps k
+    LEFT JOIN vaultKeeps vk ON keep.id = vk.id
     JOIN accounts creator ON creator.id = k.creatorId
+    GROUP BY (keep.id)
     ;";
     List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, (keep, creator) =>
     {
@@ -71,10 +73,13 @@ public class KeepsRepository
     string sql = @"
     SELECT
     k.*,
+    COUNT(vk.id) AS kept,
     creator.*
     FROM keeps k
     JOIN accounts creator ON creator.id = k.creatorId
+    JOIN accounts creator ON creator.id = k.creatorId
     WHERE k.id = @keepId
+    GROUP BY (keep.id)
     ;";
     Keep keep = _db.Query<Keep, Profile, Keep>(sql, (keep, creator) =>
     {
