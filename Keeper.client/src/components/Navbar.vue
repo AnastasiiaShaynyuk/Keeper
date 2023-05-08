@@ -1,8 +1,28 @@
 <template>
   <nav class="navbar navbar-expand-lg body-dg px-3 elevation-2 fixed-top">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+    <div class="container-fluid ">
+      <div class="d-flex justify-content-around ">
+        <ul class="navbar-nav me-auto align-items-center">
+          <li>
+            <router-link class="navbar-brand fs-6 home selectable" :to="{ name: 'Home' }"> Home </router-link>
+          </li>
+          <li v-if="account.id" class="dropend">
+            <span class="navbar-brand dropdown-toggle text-bold fs-6" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Create
+            </span>
+            <ul class="dropdown-menu bg-success border border-1 border-dark">
+              <li><a class="dropdown-item text-bold" href="#">new keep</a></li>
+              <li><hr class="dropdown-divider border-top border-dark mx-auto"></li>
+              <li><a class="dropdown-item text-bold" href="#">new vault</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <router-link class="navbar-brand" :to="{ name: 'Home' }">
+        <img class="pe-5 me-5" alt="logo" src="../assets/img/Keepr logo.png" height="55" />
+      </router-link>
+      <Login />
+      <!-- <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/Keepr logo.png" height="45" />
       </div>
     </router-link>
     <button
@@ -20,84 +40,57 @@
       <ul class="navbar-nav me-auto">
         <li>Home</li>
         <li>Create</li>
-      </ul>
+      </ul> -->
       <!-- LOGIN COMPONENT HERE -->
-      <Login />
-    </div>
-  </nav>
-
-
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
+      <!-- <Login />
+    </div> -->
     </div>
   </nav>
 </template>
 
 <script>
+import { computed } from "vue";
+import { Account } from "../models/Account";
 import Login from './Login.vue'
+import { AppState } from "../AppState";
 export default {
   setup() {
-    return {}
+    return {
+      account: computed(() => AppState.account)
+    }
   },
   components: { Login }
 }
 </script>
 
 <style scoped>
-
 nav {
   font-family: 'Oxygen', sans-serif;
 }
+
 a:hover {
   text-decoration: none;
 }
 
-.nav-link {
-  text-transform: uppercase;
+.home {
+  background-color: #E9D8D6;
+  padding: .3em 1em;
+  border-radius: 10px;
+  font-weight: bolder;
 }
 
-.navbar-nav .router-link-exact-active {
-  border-bottom: 2px solid var(--bs-success);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+.text-bold {
+  font-weight: bolder;
 }
+
+hr {
+  width: 90%;
+}
+
 
 @media screen and (min-width: 768px) {
   nav {
     height: 64px;
   }
 }
-
 </style>

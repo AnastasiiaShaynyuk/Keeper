@@ -20,7 +20,6 @@ public class VaultKeepsService
   {
     Vault vault = _vaultsService.GetOneVault(vaultKeepData.VaultId, userId);
     if (vault.CreatorId != userId) throw new Exception("Something went wrong");
-
     VaultKeep vaultKeep = _repo.CreateVaultKeep(vaultKeepData);
     vaultKeep.CreatedAt = DateTime.Now;
     vaultKeep.UpdatedAt = DateTime.Now;
