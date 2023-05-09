@@ -16,7 +16,7 @@
           <div class="list-group">
             <router-link :to="{ name: 'Account' }">
               <div class="text-bold dropdown-item">
-                manage account
+                my account
               </div>
             </router-link>
             <li><hr class="dropdown-divider border-top border-dark mx-auto"></li>
