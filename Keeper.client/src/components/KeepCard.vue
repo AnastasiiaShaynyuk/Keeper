@@ -1,6 +1,6 @@
 <template>
   <div @click="setActiveKeep(keep.id)" data-bs-toggle="modal" data-bs-target="#activeKeep" class="card text-light elevation-4 border-0 selectable position-relative" >
-    <i @click="deleteKeep(keep.id)" class="mdi mdi-alpha-x-circle positioning text-danger fs-6" v-if="account.id && keep.creatorId == account.id" title="Delete keep"></i>
+    <i @click="deleteKeep(keep.id).stop()" class="mdi mdi-alpha-x-circle positioning text-danger fs-6" v-if="account.id && keep.creatorId == account.id" title="Delete keep"></i>
     <img class="card-img" :src="keep.img" :alt="keep.name">
     <div class="card-img-overlay d-flex align-items-end w-100">
       <div class="d-flex align-items-center justify-content-between w-100">
@@ -24,7 +24,7 @@ import { AppState } from "../AppState";
 
 export default {
     props: {
-        keep: { type: Keep, required: true }
+        keep: { type: Object, required: true }
     },
     setup() {
       return {

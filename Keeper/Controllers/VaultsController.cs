@@ -12,12 +12,14 @@ public class VaultsController : ControllerBase
 {
   private readonly VaultsService _vaultsService;
   private readonly Auth0Provider _auth;
+  private readonly VaultKeepsService _vaultKeepsService;
 
 
-  public VaultsController(VaultsService vaultsService, Auth0Provider auth)
+  public VaultsController(VaultsService vaultsService, Auth0Provider auth, VaultKeepsService vaultKeepsService)
   {
     _vaultsService = vaultsService;
     _auth = auth;
+    _vaultKeepsService = vaultKeepsService;
   }
 
   [HttpPost]
@@ -38,7 +40,7 @@ public class VaultsController : ControllerBase
   }
 
   [HttpGet("{vaultId}")]
-  public async Task<ActionResult<Keep>> GetOneKeep(int vaultId)
+  public async Task<ActionResult<Keep>> GetOneVault(int vaultId)
   {
     try {
     Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
@@ -84,11 +86,12 @@ public class VaultsController : ControllerBase
   }
 
   [HttpGet("{vaultId}/keeps")]
-  public async Task<ActionResult<List<KeepsInVault>>> GetVaultKeeps(int vaultId)
+  public async Task<ActionResult<List<VaultKeepViewModel>>> GetVaultKeeps(int vaultId)
   {
     try {
     Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-    List<KeepsInVault> vKeeps = _vaultsService.GetVaultKeeps(vaultId, userInfo?.Id);
+    Vault vault = _vaultsService.GetOneVault(vaultId, userInfo?.Id);
+    List<VaultKeepViewModel> vKeeps = _vaultKeepsService.GetVaultKeeps(vaultId);
     return Ok(vKeeps);
     }
     catch (Exception e)

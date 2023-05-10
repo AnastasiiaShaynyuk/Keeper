@@ -38,4 +38,11 @@ public class VaultKeepsService
     _repo.DeleteVaultKeep(vaultKeepId);
     return "Successfully deleted!";
   }
+
+  internal List<VaultKeepViewModel> GetVaultKeeps(int vaultId)
+  {
+    List<VaultKeepViewModel> vKeeps = _repo.GetVaultKeeps(vaultId);
+    if(vKeeps == null) throw new Exception("There is no keeps");
+    return vKeeps;
+  }
 }

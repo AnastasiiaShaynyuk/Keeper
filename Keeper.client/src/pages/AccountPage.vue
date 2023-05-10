@@ -4,49 +4,127 @@
       <div class="col-md-10 col-12">
         <img class="img-fluid rounded position-relative bg-img" :src="account.coverImg" :alt="account.name">
         <img class="positioning elevation-3" :src="account.picture" :alt="account.name">
+        <div v-if="account.id" class="dropstart d-flex justify-content-end mt-2">
+          <i class="mdi mdi-dots-horizontal btn-secondary fs-3" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false" title="See more"></i>
+          <ul class="dropdown-menu bg-success mt-2 border border-1 border-dark">
+            <!-- <li class="dropdown-item text-bold" data-bs-toggle="modal" data-bs-target="#newKeep">new keep</li>
+                <hr class="dropdown-divider border-top border-dark mx-auto">
+
+                          <li class="dropdown-item text-bold" data-bs-toggle="modal" data-bs-target="#newVault">new vault</li>
+                <hr class="dropdown-divider border-top border-dark mx-auto"> -->
+
+
+            <li><a class="dropdown-item text-bold" href="#">edit account</a></li>
+          </ul>
+        </div>
       </div>
     </section>
-    <br>
     <section class="row text-center mt-5">
-      <h1>{{ account.name }}</h1>
-      <div class="d-flex justify-content-center"> 
-        <p>{{ myVaults.length }} Vaults || </p> &nbsp;
-        <p>{{  myKeeps.length }} Keeps </p>
+      <div class="col">
+        <h1>{{ account.name }}</h1>
+        <div class="d-flex justify-content-center">
+          <p>{{ myVaults.length }} Vaults || </p> &nbsp; <p>{{ myKeeps.length }} Keeps </p>
+        </div>
       </div>
     </section>
-    <!-- <img class="rounded" :src="account.picture" alt="" /> -->
-    <p>{{ account.email }}</p>
+    <section class="row">
+      <div class="col mb-2">
+        <h3>Vaults</h3>
+        <div class="row">
+          <div v-for="v in myVaults" :key="v.id" class="col-md-3 my-2 font transaction">
+            <VaultCard :vault="v" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="row">
+      <div class="col mb-2">
+        <h3>Keeps</h3>
+        <div class="row">
+          <div class="masonry-with-columns">
+            <div v-for="k in myKeeps" :key="k.id" class="transaction">
+              <KeepCard :keep="k" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
+  
+  <Modal id="newKeep">
+      <template #header>
+        <div>Add Your Keep</div>
+      </template>
+      <template #body>
+        <KeepForm />
+      </template>
+    </Modal>
+
+  <Modal id="newVault">
+      <template #header>
+        <div>Add Your Vault</div>
+      </template>
+      <template #body>
+        <VaultForm/>
+      </template>
+    </Modal>
 </template>
 
 <script>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, watchEffect } from 'vue'
 import { AppState } from '../AppState'
 import Pop from "../utils/Pop";
+import { keepsService } from "../services/KeepsService";
+import VaultCard from "../components/VaultCard.vue";
+import { accountService } from "../services/AccountService";
+import KeepCard from "../components/KeepCard.vue";
+import { useRoute } from "vue-router";
+import { logger } from "../utils/Logger.js"
+import KeepForm from "../components/KeepForm.vue";
+import VaultForm from "../components/VaultForm.vue";
+import Modal from "../components/Modal.vue";
+
 export default {
   setup() {
-    // async function getMyKeeps(accountId) {
-    //   try {
-    //     await 
-    //   }
-    //   catch (error){
-    //     Pop.error(error);
-    //   }
-    // }
-    // onMounted(() => {
-    //   getMyKeeps()
-    // })
+    async function getMyVaults() {
+      try {
+        await accountService.getMyVaults()
+      }
+      catch (error) {
+        Pop.error(error);
+      }
+    }
+    async function getSavedKeeps() {
+      try {
+        const profileId = AppState.account.id
+        await keepsService.getSavedKeeps(profileId)
+      }
+      catch (error) {
+        Pop.error(error);
+      }
+    }
+    watchEffect(() => {
+      if (AppState.account.id) {
+        getMyVaults()
+        getSavedKeeps()
+      }
+    })
+    onMounted(() => {
+      getSavedKeeps()
+
+    })
     return {
       account: computed(() => AppState.account),
-      myKeeps: computed(() => AppState.keeps),
-      myVaults: computed(() => AppState.vaults)
-
-    }
-  }
+      myKeeps: computed(() => AppState.myKeeps),
+      myVaults: computed(() => AppState.myVaults)
+    };
+  },
+  components: { VaultCard, KeepCard, KeepForm, VaultForm, Modal }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .bg-img {
   width: 100%;
   max-height: 45vh;
@@ -60,5 +138,43 @@ export default {
   left: 43%;
   border: 2px solid whitesmoke;
   border-radius: 50%;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+hr {
+  width: 90%;
+}
+
+.masonry-with-columns {
+  columns: 4 200px;
+  column-gap: 1.5rem;
+  div {
+    width: 150px;
+    color: white;
+    margin: .5rem 0 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-family: 'Marko One', serif;
+  }
+}
+
+.font{
+  font-family: 'Quando', serif;
+  text-transform: uppercase;
+  text-shadow: 1px 1px black, 1px 1px 2px #4b5154, -3px 1px 5px #8f8f8f40;
+  letter-spacing: .5em;
+}
+
+.transaction {
+  transition: all 0.2s ease-in-out;
+}
+
+.transaction:hover {
+  transform: scale(.97);
+  border-width: none;
 }
 </style>

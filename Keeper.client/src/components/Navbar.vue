@@ -15,7 +15,7 @@
               <li>
                 <hr class="dropdown-divider border-top border-dark mx-auto">
               </li>
-              <li class="dropdown-item text-bold">new vault</li>
+              <li class="dropdown-item text-bold" data-bs-toggle="modal" data-bs-target="#newVault">new vault</li>
             </ul>
           </li>
         </ul>
@@ -34,6 +34,15 @@
       <KeepForm />
     </template>
   </Modal>
+
+  <Modal id="newVault">
+    <template #header>
+      <div>Add Your Vault</div>
+    </template>
+    <template #body>
+      <VaultForm/>
+    </template>
+  </Modal>
 </template>
 
 <script>
@@ -43,13 +52,14 @@ import Login from './Login.vue'
 import { AppState } from "../AppState";
 import Modal from "./Modal.vue";
 import KeepForm from "./KeepForm.vue";
+import VaultForm from "./VaultForm.vue";
 export default {
   setup() {
     return {
       account: computed(() => AppState.account)
     }
   },
-  components: { Login, Modal, KeepForm }
+  components: { Login, Modal, KeepForm, VaultForm }
 }
 </script>
 

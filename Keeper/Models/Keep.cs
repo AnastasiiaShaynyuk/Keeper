@@ -17,7 +17,7 @@ public class Keep : RepoItem<int>
 
 }
 
-public class KeepsInVault : Keep 
+public class VaultKeepViewModel : Keep 
 {
   public int VaultKeepId { get; set; }
 }

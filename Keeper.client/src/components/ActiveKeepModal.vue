@@ -33,14 +33,15 @@
                   <div class="col d-flex justify-content-between">
                     <div v-if="account.id" class="dropdown">
                       <button class="btn btn-secondary btn-sm  dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false"> Add to Vaults </button>
+                        aria-expanded="false" @click="getMyVaults()"> Add to Vaults </button>
                       <ul class="dropdown-menu bg-success">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li class="dropdown-item" v-if="myVaults.length == 0">No Vaults</li>
+                        <div v-for="vault in myVaults">
+                          <li @click="addKeepVault(vault.id, keep.id)" class="dropdown-item" >{{ vault.name }}</li>
+                        </div>
                       </ul>
                     </div>
-                    <div  class="d-flex align-items-center">
+                    <div class="d-flex align-items-center">
                       <img class="avatar rounded-circle elevation-3" :src="keep.creator.picture" :alt="keep.creator.name"
                         :title="keep.creator.name">
                       <b class="ps-2 mb-1">{{ keep.creator.name }}</b>
@@ -58,28 +59,26 @@
       </div>
     </div>
   </div>
-  <!-- <div class="col-6 d-flex justify-content-between align-items-center">
-              <div class="btn-group" v-if="account.id">
-                <button class="btn btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
-                </button>
-                <ul v-if="myVaults.length > 0" class="dropdown-menu">
-                  <li v-for="v in myVaults" class="selectable" @click="vaultAKeep(v.id, keep.id)"
-                    :title="`Add this keep to your ${v.name} vault!`">
-                    <span>
-                      {{ v.name }}
-                    </span>
-                  </li>
-                </ul>
-                <ul v-else>
-                  <li><span>No Vaults Created!</span></li>
-                </ul>
-              </div>
-              <div> -->
+  <!-- <Modal id="newVault">
+    <template #header>
+      <div>Add Your Vault</div>
+    </template>
+    <template #body>
+      <VaultForm/>
+    </template>
+  </Modal> -->
 </template>
 
 <script>
 import { computed } from "vue";
 import { AppState } from "../AppState.js";
+import { accountService } from "../services/AccountService";
+import Pop from "../utils/Pop";
+import { vaultKeepsService } from "../services/VaultKeepsService";
+// import Modal from "./Modal.vue";
+// import VaultForm from "./VaultForm.vue";
+
+
 
 
 export default {
@@ -88,15 +87,34 @@ export default {
 
     return {
       keep: computed(() => AppState.activeKeep),
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      myVaults: computed(() => AppState.myVaults),
+      async getMyVaults() {
+        try {
+          await accountService.getMyVaults()
+        } catch (error) {
+          Pop.error(error.message)
+        }
+      },
+
+      async addKeepVault(vaultId, keepId) {
+        try {
+          await vaultKeepsService.addKeepVault(vaultId, keepId)
+          Pop.success(`Keep was added to ${this.myVaults.name} Vault`)
+        }
+        catch (error){
+          Pop.error(error);
+        }
+      }
+
     }
-  }
+  },
+  // components: {  Modal, VaultForm }
 }
 </script>
 
 
 <style lang="scss" scoped>
-
 .card-img {
   height: 100%;
   width: 100%;
@@ -121,11 +139,77 @@ export default {
   object-fit: cover;
   object-position: center;
 }
-
-
 </style>
 
+<!-- import { computed } from "vue";
+import { AppState } from "../AppState.js";
+import Pop from "../utils/Pop.js";
+import { vaultKeepsService } from "../services/VaultKeepsService.js";
+import { keepsService } from "../services/KeepsService.js";
 
+export default {
+  setup() {
+    return {
+      keep: computed(() => AppState.keep),
+      myVaults: computed(() => AppState.myVaults),
+      account: computed(() => AppState.account),
+      theme: computed(() => AppState.theme),
+      async vaultAKeep(vaultId, keepId) {
+        try {
+          await vaultKeepsService.vaultAKeep(vaultId, keepId)
+          Pop.success('Keep successfully added to your vault!')
+        } catch (error) {
+          Pop.error(error.message, '[Vaulting A Keep]')
+        }
+      },
+    }
+  }
+}
+</script>
+
+
+<style lang="scss" scoped>
+.blur {
+  backdrop-filter: blur(10px);
+}
+
+.stop-rounding {
+  border-radius: 0% !important;
+}
+
+.keep-body {
+  height: 70%;
+  overflow-y: scroll;
+}
+
+.keep-body::-webkit-scrollbar {
+  display: none;
+}
+
+.creator-pfp {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.fill {
+  min-height: 90%;
+  max-height: 70vh;
+  max-width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .keep-modal {
+    height: 70vh;
+    width: 100%;
+  }
+
+
+  .fill {
+    object-fit: contain;
+  }
+}
+</style> -->
 
 
 

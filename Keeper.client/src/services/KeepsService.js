@@ -32,6 +32,12 @@ class KeepsService {
       AppState.keeps.splice(keepIndex, 1)
     }
   }
+
+  async getSavedKeeps(profileId) {
+    const res = await api.get(`api/profiles/${profileId}/keeps`)
+    logger.log('getting my keeps', res.data)
+    AppState.myKeeps = res.data
+  }
 }
 
 export const keepsService = new KeepsService()
