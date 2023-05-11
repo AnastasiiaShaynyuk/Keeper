@@ -34,6 +34,9 @@ export default {
 
 .card-img {
   max-height: 30vh;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 </style>

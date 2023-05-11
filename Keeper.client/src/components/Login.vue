@@ -9,7 +9,7 @@
         <div type="button" class="body-bg" data-bs-toggle="dropdown"
           aria-expanded="false">
           <div v-if="account.picture || user.picture">
-            <img :src="account.picture || user.picture" alt="account photo" height="40" class="rounded-circle elevation-4" :title="account.name"/>
+            <img :src="account.picture || user.picture" alt="account photo" class="rounded-circle elevation-4 prof-img" :title="account.name"/>
           </div>
         </div>
         <div class="dropdown-menu bg-success border border-1 border-dark" aria-labelledby="authDropdown">
@@ -56,9 +56,24 @@ export default {
 hr {
   width: 90%;
 }
+.prof-img{
+  height: 7vh;
+  width: 7vh;
+  object-fit: cover;
+  object-position: center;
+}
 
 .text-bold {
   font-weight: bolder;
   cursor: pointer;
+}
+
+
+@media screen and (max-width: 450px) {
+.prof-img {
+  height: 6vh;
+  width: 6vh;
+}
+
 }
 </style>

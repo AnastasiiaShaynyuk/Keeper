@@ -133,6 +133,10 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.btn-secondary {
+  background-color: #685e6e !important;
+}
 .card-img {
   height: 100%;
   width: 100%;

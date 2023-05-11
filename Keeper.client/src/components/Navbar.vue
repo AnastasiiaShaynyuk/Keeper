@@ -3,22 +3,22 @@
   <nav class="navbar navbar-expand-lg  px-md-3 elevation-2 fixed-top">
     <div class="container-fluid">
       <div class="d-flex justify-content-around ">
-        <ul class="navbar-nav me-auto align-items-center">
-          <li class="display">
+        <div class="navbar-nav me-auto align-items-center">
+          <div class="display">
             <router-link class="navbar-brand fs-6 home selectable" :to="{ name: 'Home' }"> Home </router-link>
-          </li>
-          <li v-if="account.id" class="dropend-md dropcenter">
-            <span class="navbar-brand dropdown-toggle text-bold fs-6" role="button" data-bs-toggle="dropdown"
+          </div>
+          <div v-if="account.id" class="dropend">
+            <span class="dropdown-toggle text-bold fs-6" type="button" data-bs-toggle="dropdown"
               aria-expanded="false"> Create </span>
-            <ul class="dropdown-menu bg-success border border-1 border-dark">
-              <li class="dropdown-item text-bold" data-bs-toggle="modal" data-bs-target="#newKeep">new keep</li>
-              <li>
+            <div class="dropdown-menu bg-success border border-1 border-dark">
+              <div class="dropdown-item text-bold" data-bs-toggle="modal" data-bs-target="#newKeep">new keep</div>
+              <div>
                 <hr class="dropdown-divider border-top border-dark mx-auto">
-              </li>
-              <li class="dropdown-item text-bold" data-bs-toggle="modal" data-bs-target="#newVault">new vault</li>
-            </ul>
-          </li>
-        </ul>
+              </div>
+              <div class="dropdown-item text-bold" data-bs-toggle="modal" data-bs-target="#newVault">new vault</div>
+            </div>
+          </div>
+        </div>
       </div>
       <router-link class="navbar-brand" :to="{ name: 'Home' }">
         <img class="pe-md-5 me-md-3" alt="logo" src="../assets/img/Keepr logo.png" height="55" />
@@ -83,6 +83,8 @@ a:hover {
 
 .text-bold {
   font-weight: bolder;
+  cursor: pointer;
+
 }
 
 hr {

@@ -36,7 +36,6 @@ export default {
     return {
       editable,
       imagePreview,
-// FIXME need to fix keep positioning
       async createKeep() {
         try {
           const keepData = editable.value

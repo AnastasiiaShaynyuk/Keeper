@@ -13,7 +13,7 @@
         </div>
       </div>
     </section>
-    <section class="row text-center mt-5">
+    <section class="row justify-content-center text-center mt-5">
       <div class="col-md-11 ">
         <h1>{{ account.name }}</h1>
         <div class="d-flex justify-content-center">
@@ -122,6 +122,8 @@ export default {
   left: 43%;
   border: 2px solid whitesmoke;
   border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .text-bold {
