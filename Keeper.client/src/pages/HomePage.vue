@@ -56,12 +56,12 @@ export default {
   }
 }
 
-.transaction {
-  transition: all 0.2s ease-in-out;
-}
+// .transaction {
+//   transition: all 0.2s ease-in-out;
+// }
 
-.transaction:hover {
-  transform: scale(.97);
-  border-width: none;
-}
+// .transaction:hover {
+//   transform: scale(.97);
+//   border-width: none;
+// }
 </style>

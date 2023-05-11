@@ -6,6 +6,7 @@ import { api } from "./AxiosService.js"
 
 class KeepsService {
   async getAllKeeps() {
+    AppState.activeKeep = null
     const res = await api.get('api/keeps')
     logger.log('getting all keeps', res.data)
     AppState.keeps = res.data.map(k => new Keep(k))

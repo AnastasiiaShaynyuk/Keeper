@@ -39,7 +39,7 @@ export default {
       async createVault() {
         try {
           const vaultData = editable.value
-          if (vaultData.isPrivate === null) {
+          if (vaultData.isPrivate == null) {
             vaultData.isPrivate = false;
           }
           const vault = await vaultsService.createVault(vaultData)

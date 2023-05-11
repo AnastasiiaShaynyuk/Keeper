@@ -23,7 +23,7 @@
             <li @click="deleteVault()" class="dropdown-item text-bold">delete vault</li>
           </ul>
         </div>
-        <h6  v-if="vaultKeeps.length > 0"><span class="bg-success rounded py-1 px-2"> {{ vault.length }} Keeps </span>
+        <h6  v-if="vaultKeeps.length > 0"><span class="bg-success rounded py-1 px-2"> {{ vaultKeeps.length }} Keeps </span>
         </h6>
       </div>
     </section>
@@ -42,7 +42,7 @@
 <script>
 import { useRoute, useRouter } from "vue-router";
 import { AppState } from "../AppState";
-import { computed, onMounted, watchEffect } from "vue";
+import { computed, onMounted, onUnmounted, watchEffect } from "vue";
 import Pop from '../utils/Pop.js';
 import { vaultsService } from "../services/VaultsService";
 import { vaultKeepsService } from "../services/VaultKeepsService"
@@ -74,14 +74,14 @@ export default {
         Pop.error(error);
       }
     }
-    onMounted(() => {
-      getVaultKeeps();
-    })
+
     watchEffect(() => {
       route.params.vaultId;
       getVaultById();
       getVaultKeeps();
     });
+
+
     return {
       vault: computed(() => AppState.vault),
       account: computed(() => AppState.account),
@@ -92,7 +92,7 @@ export default {
           if (await Pop.confirm("Are you sure you want to remove your vault?", "This action cannot be undone", "Yes, I'm sure", "warning")) {
             await vaultsService.deleteVault(route.params.vaultId)
             Pop.toast("Vault has been deleted", 'success', 'center')
-            router.push({ name: "Home" })
+            router.push({ name: "Account" })
           }
         } catch (error) {
           Pop.error(error, '[delete vault]')
@@ -131,4 +131,19 @@ i {
 .text-bold {
   font-weight: bold;
 }
+
+.masonry-with-columns {
+  columns: 4 200px;
+  column-gap: 1.5rem;
+  div {
+    width: 150px;
+    color: white;
+    margin: .5rem 0 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-family: 'Marko One', serif;
+  }
+}
+
 </style>

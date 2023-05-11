@@ -64,4 +64,3 @@ export const vaultsService = new VaultsService()
 //   }
 // }
 
-// export const vaultsService = new VaultsService()
