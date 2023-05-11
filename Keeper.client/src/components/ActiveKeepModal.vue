@@ -2,12 +2,12 @@
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content">
-        <div v-if="keep" class="card border-0">
+        <div v-if="keep" class="card border-0 flex-column">
           <div class="row">
-            <div class="col-6 pe-0">
-              <img class="card-img img-fluid rounded-start" :src="keep.img" :alt="keep.name">
+            <div class="col-md-6 pe-0">
+              <img class="card-img img-fluid rounded-md-start rounded-top" :src="keep.img" :alt="keep.name">
             </div>
-            <div class="col-6 ps-0">
+            <div class="col-md-6 ps-0">
               <div class="card-body d-flex flex-column justify-content-between h-100">
                 <div>
                   <div v-if="account.id && keep.creatorId == account.id"
@@ -156,6 +156,15 @@ export default {
   width: 6vh;
   object-fit: cover;
   object-position: center;
+}
+
+@media screen and (max-width: 450px) {
+  .card-img {
+    max-height: 40vh;
+    width: 100%;
+    max-width: 96vw;
+    border-bottom-left-radius: 0 !important;
+  }
 }
 </style>
 

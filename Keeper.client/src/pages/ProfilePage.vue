@@ -162,4 +162,22 @@ hr {
   transform: scale(.97);
   border-width: none;
 }
+
+@media screen and (max-width: 450px) {
+  .masonry-with-columns {
+    columns: 2;
+  }
+
+
+  .positioning {
+  height: 23vh;
+  width: 23vh;
+  bottom: 50%;
+  left: 24%;
+}
+
+h1{
+  margin-top: 2em;
+}
+}
 </style>

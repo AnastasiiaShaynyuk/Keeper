@@ -14,7 +14,7 @@
       </div>
     </section>
     <section class="row text-center mt-5">
-      <div class="col">
+      <div class="col-md-11 ">
         <h1>{{ account.name }}</h1>
         <div class="d-flex justify-content-center">
           <p>{{ myVaults.length }} Vaults || </p> &nbsp; <p>{{ myKeeps.length }} Keeps </p>
@@ -160,5 +160,19 @@ hr {
 .transaction:hover {
   transform: scale(.97);
   border-width: none;
+}
+
+@media screen and (max-width: 450px) {
+  .masonry-with-columns {
+    columns: 2;
+  }
+
+
+  .positioning {
+  height: 23vh;
+  width: 23vh;
+  bottom: 50%;
+  left: 24%;
+}
 }
 </style>

@@ -2,7 +2,7 @@
   <header>
     <Navbar />
   </header>
-  <main>
+  <main class="my-5 pt-md-5 pt-3">
     <router-view />
   </main>
   <!-- <footer class="bg-dark text-light">

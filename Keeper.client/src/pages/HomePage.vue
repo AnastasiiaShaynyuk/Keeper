@@ -64,4 +64,10 @@ export default {
   transform: scale(.97);
   border-width: none;
 }
+
+@media screen and (max-width: 450px) {
+  .masonry-with-columns {
+    columns: 2;
+  }
+}
 </style>

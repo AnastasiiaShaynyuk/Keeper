@@ -7,7 +7,8 @@
           <div class="card-img-overlay d-flex align-items-end">
             <div class="d-flex flex-column align-items-center justify-content-center w-100 text-light">
               <h3 class="card-title text-center  font">{{ vault.name }}</h3>
-              <p class="card-text">by {{ account.name }}</p>
+              <p v-if="account.id == vault.creatorId" class="card-text">by {{ account.name }}</p>
+              <p v-else="" class="card-text">by {{ vault.creator.name }}</p>
             </div>
             <div v-if="vault.isPrivate" class="text-end me-2">
               <i class="mdi mdi-lock text-light fs-3"></i>
@@ -23,7 +24,7 @@
             <li @click="deleteVault()" class="dropdown-item text-bold">delete vault</li>
           </ul>
         </div>
-        <h6  v-if="vaultKeeps.length > 0"><span class="bg-success rounded py-1 px-2"> {{ vaultKeeps.length }} Keeps </span>
+        <h6 class="mt-3" v-if="vaultKeeps.length > 0"><span class="bg-success rounded py-1  px-2"> {{ vaultKeeps.length }} Keeps </span>
         </h6>
       </div>
     </section>
@@ -86,6 +87,7 @@ export default {
       vault: computed(() => AppState.vault),
       account: computed(() => AppState.account),
       vaultKeeps: computed(() => AppState.vaultKeeps),
+      // profile: computed(() => AppState.profile),
 
       async deleteVault() {
         try {

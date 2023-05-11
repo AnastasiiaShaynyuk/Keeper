@@ -1,13 +1,13 @@
 <template>
   <!-- TODO ask about sticky top -->
-  <nav class="navbar navbar-expand-lg body-dg px-3 elevation-2">
+  <nav class="navbar navbar-expand-lg  px-md-3 elevation-2 fixed-top">
     <div class="container-fluid">
       <div class="d-flex justify-content-around ">
         <ul class="navbar-nav me-auto align-items-center">
-          <li>
+          <li class="display">
             <router-link class="navbar-brand fs-6 home selectable" :to="{ name: 'Home' }"> Home </router-link>
           </li>
-          <li v-if="account.id" class="dropend">
+          <li v-if="account.id" class="dropend-md dropcenter">
             <span class="navbar-brand dropdown-toggle text-bold fs-6" role="button" data-bs-toggle="dropdown"
               aria-expanded="false"> Create </span>
             <ul class="dropdown-menu bg-success border border-1 border-dark">
@@ -21,7 +21,7 @@
         </ul>
       </div>
       <router-link class="navbar-brand" :to="{ name: 'Home' }">
-        <img class="pe-5 me-3" alt="logo" src="../assets/img/Keepr logo.png" height="55" />
+        <img class="pe-md-5 me-md-3" alt="logo" src="../assets/img/Keepr logo.png" height="55" />
       </router-link>
       <Login />
     </div>
@@ -66,6 +66,8 @@ export default {
 <style scoped>
 nav {
   font-family: 'Oxygen', sans-serif;
+  z-index: 100;
+  background-color: #FEF6F0;
 }
 
 a:hover {
@@ -88,9 +90,14 @@ hr {
 }
 
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 450px) {
   nav {
-    height: 64px;
+    height: 75px;
   }
+
+.display{
+  display: none;
+}
+
 }
 </style>
