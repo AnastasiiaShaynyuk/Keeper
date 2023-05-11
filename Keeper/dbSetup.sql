@@ -44,3 +44,11 @@ CREATE TABLE vaultKeeps(
   FOREIGN KEY (vaultId) REFERENCES vaults(id) ON DELETE CASCADE,
   UNIQUE(creatorId, keepId, vaultId)
 ) default charset utf8mb4 COMMENT '';
+
+
+SELECT 
+vaults.*,
+COUNT(vk.id) AS kept
+FROM vaults 
+LEFT JOIN vaultKeeps vk ON vk.keepId = vaults.id
+GROUP BY (vaults.id);

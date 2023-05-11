@@ -71,6 +71,7 @@ export default {
       keep: computed(() => AppState.activeKeep),
       account: computed(() => AppState.account),
       myVaults: computed(() => AppState.myVaults),
+      vaultKeep: computed(() => AppState.vaultKeeps),
       async getMyVaults() {
         try {
           await accountService.getMyVaults()

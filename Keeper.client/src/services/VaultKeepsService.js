@@ -19,10 +19,6 @@ class VaultKeepsService {
     AppState.activeKeep.kept++;
   }
 
-  // async setActiveVaultKeep(vaultKeepId) {
-  //   const res = await api.get(`api/keeps/${vaultKeepId}`);
-  //   logger.log(res.data);
-  // }
 
 
   async deleteVaultKeep(vaultKeepId) {
