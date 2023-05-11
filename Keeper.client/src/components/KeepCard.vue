@@ -1,5 +1,5 @@
 <template>
-  <div @click="setActiveKeep(keep)" data-bs-toggle="modal" data-bs-target="#activeKeep" class="card text-light elevation-4 border-0 selectable position-relative" >
+  <div v-if="!route.path.includes('vault')" @click="setActiveKeep(keep)" data-bs-toggle="modal" data-bs-target="#activeKeep" class="card text-light elevation-4 border-0 selectable position-relative" >
     <img  class="card-img" :src="keep.img" :alt="keep.name">
     <div class="card-img-overlay d-flex align-items-end w-100">
       <div class="d-flex align-items-center justify-content-between w-100">
@@ -9,6 +9,17 @@
       </div>
     </div>
   </div>
+
+  <div v-else @click="setActiveKeep(keep)" data-bs-toggle="modal" data-bs-target="#activeVaultKeep" class="card text-light elevation-4 border-0 selectable position-relative" >
+      <img  class="card-img" :src="keep.img" :alt="keep.name">
+      <div class="card-img-overlay d-flex align-items-end w-100">
+        <div class="d-flex align-items-center justify-content-between w-100">
+          <h5 class="card-title m-0 text-start">{{ keep.name }}</h5>
+            <img class="avatar rounded-circle elevation-3" :src="keep.creator.picture" :alt="keep.creator.name" :title="keep.creator.name">
+
+        </div>
+      </div>
+    </div>
 
   
 </template>
@@ -21,24 +32,35 @@ import { keepsService } from "../services/KeepsService";
 import Pop from "../utils/Pop";
 import { AppState } from "../AppState";
 import { Modal } from "bootstrap";
+import { useRoute } from "vue-router";
+import { vaultKeepsService } from "../services/VaultKeepsService";
 
 
 export default {
     props: {
         keep: { type: Object, required: true }
     },
-    setup() {
-      return {
+  setup() {
+      const route = useRoute()
+    return {
+        route,
           account: computed(() => AppState.account),
           async setActiveKeep(keep) {
           try {
             await keepsService.setActiveKeep(keep)
-            // Modal.getOrCreateInstance("#activeKeep").hide();
           }
           catch (error){
             Pop.error(error);
           }
-        },
+      },
+      // async setActiveVaultKeep(vaultKeepId) {
+      //     try {
+      //       await vaultKeepsService.setActiveVaultKeep(vaultKeepId)
+      //     }
+      //     catch (error){
+      //       Pop.error(error);
+      //     }
+      //   }
        
         };
     },

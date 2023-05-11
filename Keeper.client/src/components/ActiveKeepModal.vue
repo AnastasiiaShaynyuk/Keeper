@@ -13,7 +13,7 @@
                   <div v-if="account.id && keep.creatorId == account.id"
                     class="d-flex justify-content-between align-items-center">
                     <button @click="deleteKeep(keep.id)" class="btn  delete-btn"><i
-                        class="mdi mdi-cancel pe-1"></i><u>Remove</u></button>
+                        class="mdi mdi-cancel pe-1"></i><u>Delete</u></button>
                     <button title="Close" type="button" class="btn-close btn-light" data-bs-dismiss="modal"
                       aria-label="Close"></button>
                   </div>

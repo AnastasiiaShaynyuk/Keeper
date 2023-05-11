@@ -36,7 +36,7 @@
       </div>
     </section>
   </div>
-  
+  <ActiveVaultKeep id="activeVaultKeep"/>
 </template>
 
 
@@ -48,6 +48,8 @@ import Pop from '../utils/Pop.js';
 import { vaultsService } from "../services/VaultsService";
 import { vaultKeepsService } from "../services/VaultKeepsService"
 import KeepCard from "../components/KeepCard.vue";
+import ActiveKeepModal from "../components/ActiveKeepModal.vue";
+import ActiveVaultKeep from "../components/ActiveVaultKeep.vue";
 
 
 
@@ -102,7 +104,7 @@ export default {
       }
     };
   },
-  components: { KeepCard }
+  components: { KeepCard, ActiveKeepModal, ActiveVaultKeep }
 }
 </script>
 

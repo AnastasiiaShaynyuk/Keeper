@@ -31,7 +31,7 @@
                 </div>
                 <div class="row py-3">
                 <div v-if="account.id" class="col d-flex justify-content-end align-items-center">
-                  <div v-if="keep?.vaultKeepId && keep.creatorId == account.id"
+                  <div v-if="keep?.vaultKeepId"
                     class="d-flex justify-content-between align-items-center">
                     <button @click="deleteVaultKeep(keep.vaultKeepId)" class="btn  delete-btn"><i
                         class="mdi mdi-cancel pe-1"></i><u>Remove</u></button>
@@ -84,25 +84,25 @@ export default {
           if (await Pop.confirm("Are you sure you'd like to remove this keep?", "This action cannot be undone", "Yes, I'm sure", "warning")) {
             vaultKeepsService.deleteVaultKeep(vaultKeepId)
             Pop.toast('Your keep was deleted!', 'success', 'center')
-            Modal.getOrCreateInstance("#activeKeep").hide();
+            Modal.getOrCreateInstance("#activeVaultKeep").hide();
           }
         } catch (error) {
           Pop.error(error.message)
         }
       },
 
-      async deleteKeep(keepId) {
-        try {
-          if (await Pop.confirm("Are you sure you'd like to remove this keep?", "This action cannot be undone", "Yes, I'm sure", "warning")) {
-            await keepsService.deleteKeep(keepId)
-            Pop.toast('Your keep was deleted!', 'success', 'center')
-            Modal.getOrCreateInstance("#activeKeep").hide();
-          }
-        }
-        catch (error) {
-          Pop.error(error);
-        }
-      }
+      // async deleteKeep(keepId) {
+      //   try {
+      //     if (await Pop.confirm("Are you sure you'd like to remove this keep?", "This action cannot be undone", "Yes, I'm sure", "warning")) {
+      //       await keepsService.deleteKeep(keepId)
+      //       Pop.toast('Your keep was deleted!', 'success', 'center')
+      //       Modal.getOrCreateInstance("#activeKeep").hide();
+      //     }
+      //   }
+      //   catch (error) {
+      //     Pop.error(error);
+      //   }
+      // }
 
     }
   },

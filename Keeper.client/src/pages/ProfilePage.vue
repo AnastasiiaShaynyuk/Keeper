@@ -7,7 +7,7 @@
       </div>
     </section>
     <section class="row text-center mt-5">
-        <div class="col">
+        <div class="col mt-3">
           <h1>{{ profile.name }}</h1>
           <div class="d-flex justify-content-center">
             <p>{{ vaults.length }} Vaults || </p> &nbsp; <p>{{ keeps.length }} Keeps </p>
