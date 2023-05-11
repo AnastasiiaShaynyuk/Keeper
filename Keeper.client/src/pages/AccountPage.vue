@@ -37,14 +37,14 @@
         <div class="row">
           <div class="masonry-with-columns">
             <div v-for="k in myKeeps" :key="k.id" class="transaction">
-              <KeepCard :keep="k" />
+              <VaultKeepCard :vaultKeep="k" />
             </div>
           </div>
         </div>
       </div>
     </section>
   </div>
-  
+  <ActiveVaultKeep id="activeVaultKeep"/>
   <Modal id="editAccount">
     <template #header>
       <div>Edit Your Account</div>
@@ -62,11 +62,12 @@ import Pop from "../utils/Pop";
 import { keepsService } from "../services/KeepsService";
 import VaultCard from "../components/VaultCard.vue";
 import { accountService } from "../services/AccountService";
-import KeepCard from "../components/KeepCard.vue";
+import VaultKeepCard from "../components/VaultKeepCard.vue";
 import { useRoute } from "vue-router";
 import { logger } from "../utils/Logger.js"
 import Modal from "../components/Modal.vue";
 import EditAccountForm from "../components/EditAccountForm.vue";
+import ActiveVaultKeep from "../components/ActiveVaultKeep.vue";
 
 export default {
   setup() {
@@ -103,7 +104,7 @@ export default {
       myVaults: computed(() => AppState.myVaults)
     };
   },
-  components: { VaultCard, KeepCard, Modal, EditAccountForm }
+  components: { VaultCard, VaultKeepCard, Modal, EditAccountForm, ActiveVaultKeep }
 }
 </script>
 

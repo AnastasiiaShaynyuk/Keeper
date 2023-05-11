@@ -1,6 +1,7 @@
 <template>
   <router-link :to="{name: 'VaultDetails', params: {vaultId: vault.id}}">
-    <div v-if="vault" class="card text-light elevation-0">
+    <!-- FIXME do i need to go to vault page from someones vault? -->
+    <div  v-if="vault" class="card text-light elevation-0">
       <img class="card-img" :src="vault.img" :alt="vault.name"/>
       <div class="card-img-overlay d-flex align-items-end justify-content-between">
         <h6>{{ vault.name }}</h6>
