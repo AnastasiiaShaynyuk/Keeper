@@ -37,13 +37,14 @@
                   </div>
                 </div>
                 <div class="row p-3">
-                  <div class="col d-flex justify-content-between align-items-center">
-                    <div v-if="account.id" class="dropdown">
+                  <div v-if="account.id"  class="col d-flex justify-content-between align-items-center">
+                    <div class="dropdown">
                       <button class="btn drop btn-secondary btn-sm  dropdown-toggle" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false" @click="getMyVaults()"> Add to Vaults </button>
                       <ul class="dropdown-menu bg-success">
                         <li class="dropdown-item" v-if="myVaults.length == 0">No Vaults</li>
-                        <div v-for="vault in myVaults">
+                        <div v-for="vault in myVaults" >
+                          <!-- FIXME v-if="myVaults.name == " if statement needs to be done-->
                           <li @click="addKeepVault(vault.id, keep.id)" class="dropdown-item">{{ vault.name }}</li>
                         </div>
                       </ul>
@@ -52,6 +53,15 @@
                       <router-link :to="{ name: 'Profile', params: { profileId: keep.creator.id } }">
                         <img class="avatar rounded-circle elevation-3" :src="keep.creator.picture"
                           :alt="keep.creator.name" data-bs-dismiss="modal">
+                        <b class="ps-2 mb-1 text-dark">{{ keep.creator.name }}</b>
+                      </router-link>
+                    </div>
+                  </div>
+                  <div v-else class="d-flex justify-content-end"> 
+                    <div v-if="keep" class="d-flex align-items-center">
+                        <router-link :to="{ name: 'Profile', params: { profileId: keep.creator.id } }">
+                          <img class="avatar rounded-circle elevation-3" :src="keep.creator.picture"
+                            :alt="keep.creator.name" data-bs-dismiss="modal">
                           <b class="ps-2 mb-1 text-dark">{{ keep.creator.name }}</b>
                         </router-link>
                       </div>
@@ -93,21 +103,10 @@ export default {
         }
       },
 
-      // async goToProfile() {
-      //   try {
-      //     await this.$router.push({ name: 'Profile', params: { profileId: this.keep.creatorId } });
-      //     Modal.getOrCreateInstance("#exampleModal").hide();
-
-      //   }
-      //   catch (error){
-      //     Pop.error(error);
-      //   }
-      // },
-
       async addKeepVault(vaultId, keepId) {
         try {
           await vaultKeepsService.addKeepVault(vaultId, keepId)
-          Pop.success(`Keep was added to ${this.myVaults.name} Vault`)
+          Pop.toast(`Keep was added to Vault`, 'success', 'center')
         }
         catch (error) {
           Pop.error(error);
@@ -118,7 +117,7 @@ export default {
         try {
           if (await Pop.confirm("Are you sure you'd like to remove this keep?", "This action cannot be undone", "Yes, I'm sure", "warning")) {
             await keepsService.deleteKeep(keepId)
-            Pop.success('Your keep was deleted!')
+            Pop.toast('Your keep was deleted!', 'success', 'center')
             Modal.getOrCreateInstance("#activeKeep").hide();
           }
         }

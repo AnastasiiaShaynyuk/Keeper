@@ -1,5 +1,5 @@
 <template>
-  <div @click="setActiveKeep(keep.id)" data-bs-toggle="modal" data-bs-target="#activeKeep" class="card text-light elevation-4 border-0 selectable position-relative" >
+  <div @click="setActiveKeep(keep)" data-bs-toggle="modal" data-bs-target="#activeKeep" class="card text-light elevation-4 border-0 selectable position-relative" >
     <img  class="card-img" :src="keep.img" :alt="keep.name">
     <div class="card-img-overlay d-flex align-items-end w-100">
       <div class="d-flex align-items-center justify-content-between w-100">
@@ -30,9 +30,9 @@ export default {
     setup() {
       return {
           account: computed(() => AppState.account),
-          async setActiveKeep(keepId) {
+          async setActiveKeep(keep) {
           try {
-            await keepsService.setActiveKeep(keepId)
+            await keepsService.setActiveKeep(keep)
             // Modal.getOrCreateInstance("#activeKeep").hide();
           }
           catch (error){

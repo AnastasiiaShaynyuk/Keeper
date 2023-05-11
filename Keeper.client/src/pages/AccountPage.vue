@@ -8,14 +8,7 @@
           <i class="mdi mdi-dots-horizontal btn-secondary fs-3" type="button" data-bs-toggle="dropdown"
             aria-expanded="false" title="See more"></i>
           <ul class="dropdown-menu bg-success mt-2 border border-1 border-dark">
-            <!-- <li class="dropdown-item text-bold" data-bs-toggle="modal" data-bs-target="#newKeep">new keep</li>
-                <hr class="dropdown-divider border-top border-dark mx-auto">
-
-                          <li class="dropdown-item text-bold" data-bs-toggle="modal" data-bs-target="#newVault">new vault</li>
-                <hr class="dropdown-divider border-top border-dark mx-auto"> -->
-
-
-            <li><a class="dropdown-item text-bold" href="#">edit account</a></li>
+            <li class="dropdown-item text-bold" data-bs-toggle="modal" data-bs-target="#editAccount">edit account</li>
           </ul>
         </div>
       </div>
@@ -52,23 +45,14 @@
     </section>
   </div>
   
-  <Modal id="newKeep">
-      <template #header>
-        <div>Add Your Keep</div>
+  <Modal id="editAccount">
+    <template #header>
+      <div>Edit Your Account</div>
+    </template>
+    <template #body>
+      <EditAccountForm/>
       </template>
-      <template #body>
-        <KeepForm />
-      </template>
-    </Modal>
-
-  <Modal id="newVault">
-      <template #header>
-        <div>Add Your Vault</div>
-      </template>
-      <template #body>
-        <VaultForm/>
-      </template>
-    </Modal>
+  </Modal>
 </template>
 
 <script>
@@ -81,9 +65,8 @@ import { accountService } from "../services/AccountService";
 import KeepCard from "../components/KeepCard.vue";
 import { useRoute } from "vue-router";
 import { logger } from "../utils/Logger.js"
-import KeepForm from "../components/KeepForm.vue";
-import VaultForm from "../components/VaultForm.vue";
 import Modal from "../components/Modal.vue";
+import EditAccountForm from "../components/EditAccountForm.vue";
 
 export default {
   setup() {
@@ -120,7 +103,7 @@ export default {
       myVaults: computed(() => AppState.myVaults)
     };
   },
-  components: { VaultCard, KeepCard, KeepForm, VaultForm, Modal }
+  components: { VaultCard, KeepCard, Modal, EditAccountForm }
 }
 </script>
 

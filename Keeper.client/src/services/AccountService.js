@@ -14,9 +14,15 @@ class AccountService {
     }
   }
 
+  async editAccount(accountData) {
+    const res = await api.put("/account", accountData);
+    logger.log(res.data)
+    AppState.account = new Account(res.data);
+  }
+
   async getMyVaults() {
     const res = await api.get('/account/vaults')
-    logger.log('getting my vaults', res.data)
+    // logger.log('getting my vaults', res.data)
     AppState.myVaults = res.data
   }
 }

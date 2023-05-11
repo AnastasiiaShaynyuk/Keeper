@@ -20,9 +20,14 @@ class KeepsService {
     return newKeep
   }
 
-  async setActiveKeep(keepId) {
-    AppState.activeKeep = AppState.keeps.find(k => k.id == keepId)
-    logger.log(AppState.activeKeep)
+  async setActiveKeep(keep) {
+    const res = await api.get(`api/keeps/${keep.id}`);
+    logger.log(res.data)
+    const creatorId = AppState.account.id
+    if (keep.creatorId != creatorId) {
+      keep.views++
+    }
+    AppState.activeKeep = keep
   }
 
   async deleteKeep(keepId) {

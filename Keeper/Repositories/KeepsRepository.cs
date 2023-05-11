@@ -23,9 +23,6 @@ public class KeepsRepository
     ;";
     int id = _db.ExecuteScalar<int>(sql, keepData);
     keepData.Id = id;
-
-    // List<Keep> allKeeps = GetAllKeeps();
-    // allKeeps.Insert(0, keepData);
     return keepData;
   }
 
@@ -43,7 +40,8 @@ public class KeepsRepository
     SET
     name = @Name,
     description = @Description,
-    img = @Img
+    img = @Img,
+    views = @Views
     WHERE id = @Id
     ;";
     _db.Execute(sql, originalKeep);
