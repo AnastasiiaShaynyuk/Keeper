@@ -28,20 +28,26 @@
 import { computed, ref } from "vue";
 import Pop from "../utils/Pop";
 import { keepsService } from "../services/KeepsService";
+import { AppState } from "../AppState";
+import { useRoute } from "vue-router";
 
 export default {
   setup() {
     const editable = ref({})
     const imagePreview = computed(() => editable.value.img);
+    const route = useRoute()
     return {
       editable,
       imagePreview,
       async createKeep() {
         try {
+          let userId
+          route.params.profileId ? userId = route.params.profileId : userId = AppState.account.id
           const keepData = editable.value
-          const keep = await keepsService.createKeep(keepData)
+          const keep = await keepsService.createKeep(keepData, userId)
           Pop.toast('Successfully created a keep', 'success', 'center')
           editable.value = {}
+          AppState.keeps.unshift(keep);
         }
         catch (error){
           Pop.error(error);

@@ -10,14 +10,19 @@
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { AppState } from './AppState'
 import Navbar from './components/Navbar.vue'
 
 export default {
   setup() {
+    const appState = computed(() => AppState)
+    watch(() => appState.value.keeps, (newVal, oldVal) => {
+      console.log('AppState.keeps changed', newVal, oldVal)
+    }, { deep: true })
+
     return {
-      appState: computed(() => AppState)
+      appState
     }
   },
   components: { Navbar }

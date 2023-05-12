@@ -6,11 +6,14 @@ import { Vault } from "../models/Vault";
 
 
 class VaultsService {
-  async createVault(vaultData) {
+  async createVault(vaultData, userId) {
     const res = await api.post('api/vaults', vaultData)
     logger.log('creating vault', res.data)
     AppState.vaults.push(new Vault(res.data));
-    return res.data;
+    // AppState.myVaults.push(new Vault(res.data));
+    if (res.data.creatorId == userId) {
+      AppState.myVaults.push(new Vault(res.data));
+    }
   }
 
   async getVaultById(vaultId) {

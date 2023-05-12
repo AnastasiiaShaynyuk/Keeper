@@ -7,7 +7,7 @@
           <div class="display">
             <router-link class="navbar-brand fs-6 home selectable" :to="{ name: 'Home' }"> Home </router-link>
           </div>
-          <div v-if="account.id" class="dropend">
+          <div v-if="account.id && !route.path.includes('profile') && !route.path.includes('vaults')" class="dropend">
             <span class="dropdown-toggle text-bold fs-6" type="button" data-bs-toggle="dropdown"
               aria-expanded="false"> Create </span>
             <div class="dropdown-menu bg-success border border-1 border-dark">
@@ -53,9 +53,13 @@ import { AppState } from "../AppState";
 import Modal from "./Modal.vue";
 import KeepForm from "./KeepForm.vue";
 import VaultForm from "./VaultForm.vue";
+import { useRoute } from "vue-router";
+
 export default {
   setup() {
+      const route = useRoute()
     return {
+        route,
       account: computed(() => AppState.account)
     }
   },

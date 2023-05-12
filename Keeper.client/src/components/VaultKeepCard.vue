@@ -20,6 +20,7 @@ import { keepsService } from "../services/KeepsService";
 import Pop from "../utils/Pop";
 import { AppState } from "../AppState";
 import { Modal } from "bootstrap";
+import { logger } from "../utils/Logger";
 
 
 export default {
@@ -30,8 +31,10 @@ export default {
     return {
       account: computed(() => AppState.account),
       vaultKeeps: computed(() => AppState.vaultKeeps),
+
       async setActiveVaultKeep(vaultKeep) {
         try {
+          logger.log('vault keep', vaultKeep)
           await keepsService.setActiveKeep(vaultKeep)
         }
         catch (error) {

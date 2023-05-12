@@ -8,14 +8,15 @@ class KeepsService {
   async getAllKeeps() {
     AppState.activeKeep = null
     const res = await api.get('api/keeps')
-    AppState.keeps = res.data.map(k => new Keep(k))
+    AppState.keeps = res.data;
   }
 
-  async createKeep(keepData) {
+  async createKeep(keepData, userId) {
     const res = await api.post('api/keeps', keepData)
-    const newKeep = new Keep(res.data);
-    AppState.keeps.unshift(newKeep)
-    return newKeep
+    AppState.keeps.push(res.data);
+    if (res.data.creatorId == userId) {
+      AppState.myKeeps.push(res.data);
+    }
   }
 
   async setActiveKeep(keep) {

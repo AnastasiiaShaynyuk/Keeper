@@ -28,21 +28,26 @@
 import { computed, ref } from "vue";
 import Pop from "../utils/Pop";
 import { vaultsService } from "../services/VaultsService.js";
+import { useRoute } from 'vue-router';
+import { AppState } from "../AppState";
 
 export default {
   setup() {
     const editable = ref({})
+    const route = useRoute();
     const imagePreview = computed(() => editable.value.img);
     return {
       editable,
       imagePreview,
       async createVault() {
         try {
+          let userId
+          route.params.profileId ? userId = route.params.profileId : userId = AppState.account.id
           const vaultData = editable.value
           if (vaultData.isPrivate == null) {
             vaultData.isPrivate = false;
           }
-          const vault = await vaultsService.createVault(vaultData)
+          const vault = await vaultsService.createVault(vaultData, userId)
           Pop.toast('Successfully created a vault', 'success', 'center')
           editable.value = {}
         }
