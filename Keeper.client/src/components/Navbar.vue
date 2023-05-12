@@ -3,13 +3,13 @@
   <nav class="navbar navbar-expand-lg  px-md-3 elevation-2 fixed-top">
     <div class="container-fluid">
       <div class="d-flex justify-content-around ">
-        <div class="navbar-nav me-auto align-items-center">
+        <div class="d-flex me-auto align-items-center">
           <div class="display">
             <router-link class="navbar-brand fs-6 home selectable" :to="{ name: 'Home' }"> Home </router-link>
           </div>
           <div v-if="account.id && !route.path.includes('profile') && !route.path.includes('vaults')" class="dropend">
-            <span class="dropdown-toggle text-bold fs-6" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false"> Create </span>
+            <span class="dropdown-toggle text-bold fs-6" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Create </span>
             <div class="dropdown-menu bg-success border border-1 border-dark">
               <div class="dropdown-item text-bold" data-bs-toggle="modal" data-bs-target="#newKeep">new keep</div>
               <div>
@@ -34,13 +34,12 @@
       <KeepForm />
     </template>
   </Modal>
-
   <Modal id="newVault">
     <template #header>
       <div>Add Your Vault</div>
     </template>
     <template #body>
-      <VaultForm/>
+      <VaultForm />
     </template>
   </Modal>
 </template>
@@ -57,9 +56,9 @@ import { useRoute } from "vue-router";
 
 export default {
   setup() {
-      const route = useRoute()
+    const route = useRoute()
     return {
-        route,
+      route,
       account: computed(() => AppState.account)
     }
   },
@@ -101,9 +100,9 @@ hr {
     height: 75px;
   }
 
-.display{
-  display: none;
-}
+  .display {
+    display: none;
+  }
 
 }
 </style>

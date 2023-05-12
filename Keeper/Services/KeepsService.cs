@@ -58,4 +58,9 @@ public class KeepsService
       }
     return keep;
   }
+
+  internal void IncrementKeeps(int? keepId) 
+  {
+    _repo.IncrementKeeps(keepId);
+  }
 }

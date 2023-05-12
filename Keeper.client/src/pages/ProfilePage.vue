@@ -19,7 +19,7 @@
         <div class="col mb-2">
           <h3>Vaults</h3>
           <div class="row">
-            <div v-for="v in vaults" :key="v.id" class="col-md-3 my-2 font transaction">
+            <div v-for="v in vaults" :key="v.id" class="col-md-3 my-2 col-6 font transaction">
               <VaultCard :vault="v" />
             </div>
           </div>

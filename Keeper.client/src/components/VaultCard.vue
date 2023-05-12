@@ -4,7 +4,7 @@
     <div  v-if="vault" class="card text-light elevation-0">
       <img class="card-img" :src="vault.img" :alt="vault.name"/>
       <div class="card-img-overlay d-flex align-items-end justify-content-between">
-        <h6>{{ vault.name }}</h6>
+        <h6 class="m-0">{{ vault.name }}</h6>
         <i v-if="vault.isPrivate" class="mdi mdi-lock fs-4" title="Private Vault"></i>
       </div>
     </div>
@@ -38,5 +38,12 @@ export default {
   object-fit: cover;
   object-position: center;
 }
+
+@media screen and (max-width: 450px) {
+  .card-img {
+  max-height: 15vh;
+}
+}
+
 
 </style>

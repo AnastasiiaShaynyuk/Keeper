@@ -38,13 +38,15 @@ import { vaultKeepsService } from "../services/VaultKeepsService";
 
 export default {
     props: {
-        keep: { type: Object, required: true }
+    keep: { type: Object, required: true },
+        // vaultKeep: {type:  Object, required: true }
     },
   setup() {
       const route = useRoute()
     return {
-        route,
+      route,
           account: computed(() => AppState.account),
+          
           async setActiveKeep(keep) {
           try {
             await keepsService.setActiveKeep(keep)
@@ -53,9 +55,9 @@ export default {
             Pop.error(error);
           }
       },
-      // async setActiveVaultKeep(vaultKeepId) {
+      // async setActiveVaultKeep(vaultKeep) {
       //     try {
-      //       await vaultKeepsService.setActiveVaultKeep(vaultKeepId)
+      //       await vaultKeepsService.setActiveVaultKeep(vaultKeep)
       //     }
       //     catch (error){
       //       Pop.error(error);
@@ -87,5 +89,11 @@ export default {
   position: absolute;
   bottom: 98%;
   left: 95%
+}
+
+@media screen and (max-width: 450px) {
+  .avatar {
+    display: none;
+  }
 }
 </style>

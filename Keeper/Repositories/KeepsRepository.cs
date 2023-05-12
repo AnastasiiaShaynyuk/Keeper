@@ -90,4 +90,17 @@ public class KeepsRepository
     }, new{keepId}).FirstOrDefault();
     return keep;
   }
+
+  internal void IncrementKeeps(int? id) {
+    string sql = @"
+    UPDATE keeps
+    SET
+    kept = kept + 1
+    WHERE id = @id
+    ;";
+    _db.Execute(sql, new { id });
+  }
+
+
+  // create a function that is just going to update your keeps table and increase kept+1
 }

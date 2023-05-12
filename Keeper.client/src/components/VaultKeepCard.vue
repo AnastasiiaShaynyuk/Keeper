@@ -36,6 +36,7 @@ export default {
         try {
           logger.log('vault keep', vaultKeep)
           await keepsService.setActiveKeep(vaultKeep)
+
         }
         catch (error) {
           Pop.error(error);

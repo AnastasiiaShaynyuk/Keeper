@@ -22,17 +22,23 @@
       </div>
     </section>
     <section class="row">
-      <div class="col mb-2">
+      <div v-if="myVaults.length == 0" class="col mb-2 text-center">
+        <h5>You do not have any Vaults.</h5>
+      </div>
+      <div v-else class="col mb-2">
         <h3>Vaults</h3>
         <div class="row">
-          <div v-for="v in myVaults" :key="v.id" class="col-md-3 my-2 font transaction">
+          <div v-for="v in myVaults" :key="v.id" class="col-md-3 col-6 my-2 font transaction">
             <VaultCard :vault="v" />
           </div>
         </div>
       </div>
     </section>
     <section class="row">
-      <div class="col mb-2">
+      <div v-if="myKeeps.length == 0" class="col mb-2 text-center">
+          <h5>You do not have any Keeps.</h5>
+        </div>
+      <div v-else class="col mb-2">
         <h3>Keeps</h3>
         <div class="row">
           <div class="masonry-with-columns">
@@ -101,7 +107,8 @@ export default {
     return {
       account: computed(() => AppState.account),
       myKeeps: computed(() => AppState.myKeeps),
-      myVaults: computed(() => AppState.myVaults)
+      myVaults: computed(() => AppState.myVaults),
+      
     };
   },
   components: { VaultCard, VaultKeepCard, Modal, EditAccountForm, ActiveVaultKeep }
@@ -175,6 +182,10 @@ hr {
   width: 23vh;
   bottom: 50%;
   left: 24%;
+}
+
+.font {
+  letter-spacing: .3em;
 }
 }
 </style>
