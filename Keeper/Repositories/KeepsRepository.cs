@@ -49,7 +49,6 @@ public class KeepsRepository
 
   internal List<Keep> GetAllKeeps()
   {
-    // TODO add COUNT
     string sql = @"
     SELECT 
     k.*,
@@ -71,7 +70,6 @@ public class KeepsRepository
 
   internal Keep GetOneKeep(int keepId)
   {
-    // TODO add COUNT
     string sql = @"
     SELECT
     k.*,
@@ -101,6 +99,4 @@ public class KeepsRepository
     _db.Execute(sql, new { id });
   }
 
-
-  // create a function that is just going to update your keeps table and increase kept+1
 }

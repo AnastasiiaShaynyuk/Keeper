@@ -43,7 +43,7 @@
 <script>
 import { useRoute, useRouter } from "vue-router";
 import { AppState } from "../AppState";
-import { computed, onMounted, onUnmounted, watchEffect } from "vue";
+import { computed, watchEffect } from "vue";
 import Pop from '../utils/Pop.js';
 import { vaultsService } from "../services/VaultsService";
 import { vaultKeepsService } from "../services/VaultKeepsService"
@@ -52,8 +52,6 @@ import ActiveKeepModal from "../components/ActiveKeepModal.vue";
 import ActiveVaultKeep from "../components/ActiveVaultKeep.vue";
 
 
-
-//  
 export default {
   setup() {
     const route = useRoute();

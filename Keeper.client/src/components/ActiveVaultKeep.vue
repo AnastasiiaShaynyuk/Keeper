@@ -69,7 +69,6 @@ export default {
 
     return {
       keeps: computed(() => AppState.keeps),
-      // keep: computed(() => AppState.activeVaultKeep),
       keep: computed(() => AppState.activeKeep),
       account: computed(() => AppState.account),
       myVaults: computed(() => AppState.myVaults),

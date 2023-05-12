@@ -22,9 +22,7 @@ public class VaultKeepsService
   {
     Vault vault = _vaultsService.GetOneVault(vaultKeepData.VaultId, userId);
     if (vault.CreatorId != userId) throw new Exception("Something went wrong");
-    // go to the keep repo and call the IncreaseKept function ... make sure to pass the correct vaultkeepId
     _keepsService.IncrementKeeps(vaultKeepData.KeepId);
-
     VaultKeep vaultKeep = _repo.CreateVaultKeep(vaultKeepData);
     vaultKeep.CreatedAt = DateTime.Now;
     vaultKeep.UpdatedAt = DateTime.Now;

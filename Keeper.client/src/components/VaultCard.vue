@@ -1,6 +1,5 @@
 <template>
   <router-link :to="{name: 'VaultDetails', params: {vaultId: vault.id}}">
-    <!-- FIXME do i need to go to vault page from someones vault? -->
     <div  v-if="vault" class="card text-light elevation-0">
       <img class="card-img" :src="vault.img" :alt="vault.name"/>
       <div class="card-img-overlay d-flex align-items-end justify-content-between">
@@ -14,7 +13,6 @@
 
 <script>
 import { computed } from "vue";
-import { Vault } from "../models/Vault";
 import { AppState } from "../AppState";
 
 export default {

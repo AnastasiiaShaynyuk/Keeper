@@ -36,8 +36,8 @@
     </section>
     <section class="row">
       <div v-if="myKeeps.length == 0" class="col mb-2 text-center">
-          <h5>You do not have any Keeps.</h5>
-        </div>
+        <h5>You do not have any Keeps.</h5>
+      </div>
       <div v-else class="col mb-2">
         <h3>Keeps</h3>
         <div class="row">
@@ -50,14 +50,14 @@
       </div>
     </section>
   </div>
-  <ActiveVaultKeep id="activeVaultKeep"/>
+  <ActiveVaultKeep id="activeVaultKeep" />
   <Modal id="editAccount">
     <template #header>
       <div>Edit Your Account</div>
     </template>
     <template #body>
-      <EditAccountForm/>
-      </template>
+      <EditAccountForm />
+    </template>
   </Modal>
 </template>
 
@@ -108,7 +108,7 @@ export default {
       account: computed(() => AppState.account),
       myKeeps: computed(() => AppState.myKeeps),
       myVaults: computed(() => AppState.myVaults),
-      
+
     };
   },
   components: { VaultCard, VaultKeepCard, Modal, EditAccountForm, ActiveVaultKeep }
@@ -144,6 +144,7 @@ hr {
 .masonry-with-columns {
   columns: 4 200px;
   column-gap: 1.5rem;
+
   div {
     width: 150px;
     color: white;
@@ -155,7 +156,7 @@ hr {
   }
 }
 
-.font{
+.font {
   font-family: 'Quando', serif;
   text-transform: uppercase;
   text-shadow: 1px 1px black, 1px 1px 2px #4b5154, -3px 1px 5px #8f8f8f40;
@@ -178,14 +179,14 @@ hr {
 
 
   .positioning {
-  height: 23vh;
-  width: 23vh;
-  bottom: 50%;
-  left: 24%;
-}
+    height: 23vh;
+    width: 23vh;
+    bottom: 50%;
+    left: 24%;
+  }
 
-.font {
-  letter-spacing: .3em;
-}
+  .font {
+    letter-spacing: .3em;
+  }
 }
 </style>

@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO ask about sticky top -->
   <nav class="navbar navbar-expand-lg  px-md-3 elevation-2 fixed-top">
     <div class="container-fluid">
       <div class="d-flex justify-content-around ">
@@ -87,7 +86,6 @@ a:hover {
 .text-bold {
   font-weight: bolder;
   cursor: pointer;
-
 }
 
 hr {

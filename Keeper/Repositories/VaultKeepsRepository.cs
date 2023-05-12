@@ -54,7 +54,6 @@ public class VaultKeepsRepository
     ;";
     List<VaultKeepViewModel> vKeeps = _db.Query<VaultKeepViewModel, Profile, VaultKeepViewModel>(sql, (keepsInVault, creator) =>
     {
-      // keepsInVault.VaultKeepId = keepsInVault.Id;
       keepsInVault.Creator = creator;
       return keepsInVault;
     }, new { vaultId }).ToList();

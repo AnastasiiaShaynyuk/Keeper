@@ -38,7 +38,7 @@ public class AccountController : ControllerBase
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
       List<Vault> myVaults = _vaultsService.GetMyVaults(userInfo?.Id);
-        return Ok(myVaults);
+      return Ok(myVaults);
     }
     catch (Exception e)
     {

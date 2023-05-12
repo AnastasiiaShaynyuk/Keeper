@@ -149,7 +149,6 @@ export default {
 
 .modal-content {
   background-color: #FEF6F0;
-  // max-height: 80vh;
 }
 
 .drop {

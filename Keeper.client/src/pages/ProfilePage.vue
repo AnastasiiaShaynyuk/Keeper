@@ -14,7 +14,6 @@
           </div>
         </div>
       </section>
-
       <section class="row">
         <div class="col mb-2">
           <h3>Vaults</h3>
@@ -25,7 +24,6 @@
           </div>
         </div>
       </section>
-
           <section class="row">
       <div class="col mb-2">
         <h3>Keeps</h3>
@@ -52,7 +50,7 @@ import VaultCard from "../components/VaultCard.vue";
 import Pop from "../utils/Pop.js";
 import Modal from "../components/Modal.vue";
 import ActiveKeepModal from "../components/ActiveKeepModal.vue";
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import KeepCard from "../components/KeepCard.vue";
 
 

@@ -56,12 +56,4 @@ public class VaultsService
     if (vault.IsPrivate == true && userId != vault.CreatorId) throw new Exception("SOMETHING WENT WRONG");
     return vault;
   }
-
-  // internal List<KeepsInVault> GetVaultKeeps(int vaultId, string userId)
-  // {
-  //   Vault vault = GetOneVault(vaultId, userId);
-  //   if (vault.IsPrivate == true && userId != vault.CreatorId) throw new Exception("SOMETHING WENT WRONG");
-  //   List<KeepsInVault> vKeeps = _repo.GetVaultKeeps(vaultId);
-  //   return vKeeps;
-  // }
 }

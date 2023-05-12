@@ -31,12 +31,9 @@ export default {
     return {
       account: computed(() => AppState.account),
       vaultKeeps: computed(() => AppState.vaultKeeps),
-
       async setActiveVaultKeep(vaultKeep) {
         try {
-          logger.log('vault keep', vaultKeep)
           await keepsService.setActiveKeep(vaultKeep)
-
         }
         catch (error) {
           Pop.error(error);

@@ -1,27 +1,26 @@
 <template>
-  <div v-if="!route.path.includes('vault')" @click="setActiveKeep(keep)" data-bs-toggle="modal" data-bs-target="#activeKeep" class="card text-light elevation-4 border-0 selectable position-relative" >
-    <img  class="card-img" :src="keep.img" :alt="keep.name">
+  <div v-if="!route.path.includes('vault')" @click="setActiveKeep(keep)" data-bs-toggle="modal"
+    data-bs-target="#activeKeep" class="card text-light elevation-4 border-0 selectable position-relative">
+    <img class="card-img" :src="keep.img" :alt="keep.name">
     <div class="card-img-overlay d-flex align-items-end w-100">
       <div class="d-flex align-items-center justify-content-between w-100">
         <h5 class="card-title m-0 text-start">{{ keep.name }}</h5>
-          <img class="avatar rounded-circle elevation-3" :src="keep.creator.picture" :alt="keep.creator.name" :title="keep.creator.name">
-
+        <img class="avatar rounded-circle elevation-3" :src="keep.creator.picture" :alt="keep.creator.name"
+          :title="keep.creator.name">
       </div>
     </div>
   </div>
-
-  <div v-else @click="setActiveKeep(keep)" data-bs-toggle="modal" data-bs-target="#activeVaultKeep" class="card text-light elevation-4 border-0 selectable position-relative" >
-      <img  class="card-img" :src="keep.img" :alt="keep.name">
-      <div class="card-img-overlay d-flex align-items-end w-100">
-        <div class="d-flex align-items-center justify-content-between w-100">
-          <h5 class="card-title m-0 text-start">{{ keep.name }}</h5>
-            <img class="avatar rounded-circle elevation-3" :src="keep.creator.picture" :alt="keep.creator.name" :title="keep.creator.name">
-
-        </div>
+  <div v-else @click="setActiveKeep(keep)" data-bs-toggle="modal" data-bs-target="#activeVaultKeep"
+    class="card text-light elevation-4 border-0 selectable position-relative">
+    <img class="card-img" :src="keep.img" :alt="keep.name">
+    <div class="card-img-overlay d-flex align-items-end w-100">
+      <div class="d-flex align-items-center justify-content-between w-100">
+        <h5 class="card-title m-0 text-start">{{ keep.name }}</h5>
+        <img class="avatar rounded-circle elevation-3" :src="keep.creator.picture" :alt="keep.creator.name"
+          :title="keep.creator.name">
       </div>
     </div>
-
-  
+  </div>
 </template>
 
 
@@ -37,35 +36,24 @@ import { vaultKeepsService } from "../services/VaultKeepsService";
 
 
 export default {
-    props: {
-    keep: { type: Object, required: true },
-        // vaultKeep: {type:  Object, required: true }
-    },
+  props: {
+    keep: { type: Object, required: true }
+  },
   setup() {
-      const route = useRoute()
+    const route = useRoute()
     return {
       route,
-          account: computed(() => AppState.account),
-          
-          async setActiveKeep(keep) {
-          try {
-            await keepsService.setActiveKeep(keep)
-          }
-          catch (error){
-            Pop.error(error);
-          }
+      account: computed(() => AppState.account),
+      async setActiveKeep(keep) {
+        try {
+          await keepsService.setActiveKeep(keep)
+        }
+        catch (error) {
+          Pop.error(error);
+        }
       },
-      // async setActiveVaultKeep(vaultKeep) {
-      //     try {
-      //       await vaultKeepsService.setActiveVaultKeep(vaultKeep)
-      //     }
-      //     catch (error){
-      //       Pop.error(error);
-      //     }
-      //   }
-       
-        };
-    },
+    };
+  },
 }
 </script>
 
@@ -83,7 +71,6 @@ export default {
 }
 
 .positioning {
-  // background-color: rgba(255, 87, 87, 0.525);
   height: 1em;
   width: 1em;
   position: absolute;

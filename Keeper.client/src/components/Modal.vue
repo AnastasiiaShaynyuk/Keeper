@@ -1,5 +1,4 @@
 <template>
-  <!-- Modal Body -->
   <div class="modal fade" tabindex="-1" data-bs-keyboard="false" role="dialog"
     aria-labelledby="modalTitleId" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" :class="size" role="document">
