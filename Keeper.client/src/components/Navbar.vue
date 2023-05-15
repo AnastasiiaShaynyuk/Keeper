@@ -1,26 +1,61 @@
 <template>
-  <nav class="navbar navbar-expand-lg  px-md-3 elevation-2 fixed-top">
+  <nav class="navbar navbar-expand-lg px-md-3 elevation-2 fixed-top">
     <div class="container-fluid">
-      <div class="d-flex justify-content-around ">
+      <div class="d-flex justify-content-around">
         <div class="d-flex me-auto align-items-center">
           <div class="display">
-            <router-link class="navbar-brand fs-6 home selectable" :to="{ name: 'Home' }"> Home </router-link>
+            <router-link
+              class="navbar-brand fs-6 home selectable"
+              :to="{ name: 'Home' }"
+            >
+              Home
+            </router-link>
           </div>
-          <div v-if="account.id && !route.path.includes('profile') && !route.path.includes('vaults')" class="dropend">
-            <span class="dropdown-toggle text-bold fs-6" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Create </span>
+          <div
+            v-if="
+              account.id &&
+              !route.path.includes('profile') &&
+              !route.path.includes('vaults')
+            "
+            class="dropend"
+          >
+            <span
+              class="dropdown-toggle text-bold fs-6"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Create
+            </span>
             <div class="dropdown-menu bg-success border border-1 border-dark">
-              <div class="dropdown-item text-bold" data-bs-toggle="modal" data-bs-target="#newKeep">new keep</div>
-              <div>
-                <hr class="dropdown-divider border-top border-dark mx-auto">
+              <div
+                class="dropdown-item text-bold"
+                data-bs-toggle="modal"
+                data-bs-target="#newKeep"
+              >
+                new keep
               </div>
-              <div class="dropdown-item text-bold" data-bs-toggle="modal" data-bs-target="#newVault">new vault</div>
+              <div>
+                <hr class="dropdown-divider border-top border-dark mx-auto" />
+              </div>
+              <div
+                class="dropdown-item text-bold"
+                data-bs-toggle="modal"
+                data-bs-target="#newVault"
+              >
+                new vault
+              </div>
             </div>
           </div>
         </div>
       </div>
       <router-link class="navbar-brand" :to="{ name: 'Home' }">
-        <img class="pe-md-5 me-md-3" alt="logo" src="../assets/img/Keepr logo.png" height="55" />
+        <img
+          class="pe-md-5 me-md-3"
+          alt="logo"
+          src="../assets/img/Keeprlogo.png"
+          height="55"
+        />
       </router-link>
       <Login />
     </div>
@@ -46,7 +81,7 @@
 <script>
 import { computed } from "vue";
 import { Account } from "../models/Account";
-import Login from './Login.vue'
+import Login from "./Login.vue";
 import { AppState } from "../AppState";
 import Modal from "./Modal.vue";
 import KeepForm from "./KeepForm.vue";
@@ -55,21 +90,21 @@ import { useRoute } from "vue-router";
 
 export default {
   setup() {
-    const route = useRoute()
+    const route = useRoute();
     return {
       route,
-      account: computed(() => AppState.account)
-    }
+      account: computed(() => AppState.account),
+    };
   },
-  components: { Login, Modal, KeepForm, VaultForm }
-}
+  components: { Login, Modal, KeepForm, VaultForm },
+};
 </script>
 
 <style scoped>
 nav {
-  font-family: 'Oxygen', sans-serif;
+  font-family: "Oxygen", sans-serif;
   z-index: 100;
-  background-color: #FEF6F0;
+  background-color: #fef6f0;
 }
 
 a:hover {
@@ -77,8 +112,8 @@ a:hover {
 }
 
 .home {
-  background-color: #E9D8D6;
-  padding: .3em 1em;
+  background-color: #e9d8d6;
+  padding: 0.3em 1em;
   border-radius: 10px;
   font-weight: bolder;
 }
@@ -92,7 +127,6 @@ hr {
   width: 90%;
 }
 
-
 @media screen and (max-width: 450px) {
   nav {
     height: 75px;
@@ -101,6 +135,5 @@ hr {
   .display {
     display: none;
   }
-
 }
 </style>

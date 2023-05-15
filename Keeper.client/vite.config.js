@@ -5,10 +5,10 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [vue()],
   build: {
-    outDir: 'docs',
-    sourcemap: false
+    outDir: "../keeper/wwwroot",
+    sourcemap: false,
   },
   server: {
-    port: 8080
-  }
-})
+    port: 8080,
+  },
+});
